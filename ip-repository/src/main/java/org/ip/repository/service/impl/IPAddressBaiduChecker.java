@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository;
+package org.ip.repository.service.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.poi.ss.formula.functions.T;
 import org.ip.repository.bean.IPAddress;
+import org.ip.repository.bean.baidu.BaiduIPBean;
+import org.ip.repository.service.IPAddressChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,10 +40,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @since Apr 10, 2015
  */
-public class IpAddressBaiduChecker implements IpAddressChecker {
+public class IPAddressBaiduChecker implements IPAddressChecker {
 
 	private static final Logger log = LoggerFactory
-			.getLogger(IpAddressBaiduChecker.class);
+			.getLogger(IPAddressBaiduChecker.class);
 
 	@Override
 	public IPAddress ipcheck(String ip) {
@@ -71,7 +75,7 @@ public class IpAddressBaiduChecker implements IpAddressChecker {
 
 				ObjectMapper mapper = new ObjectMapper();
 
-				ipaddress = mapper.readValue(responseStr, IPAddress.class);
+				ipaddress = mapper.readValue(responseStr, BaiduIPBean.class);
 				
 			}
 

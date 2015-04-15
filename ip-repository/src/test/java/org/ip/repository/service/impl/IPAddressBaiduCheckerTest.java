@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository;
+package org.ip.repository.service.impl;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,7 +27,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ip.repository.bean.IPAddress;
-import org.ip.repository.bean.IPLocation;
+import org.ip.repository.bean.baidu.BaiduIPBean;
+import org.ip.repository.bean.baidu.IPLocation;
+import org.ip.repository.service.impl.IPAddressBaiduChecker;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,18 +44,17 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  *
  * @since  Apr 10, 2015
  */
-public class IpAddressBaiduCheckerTest {
-	private static final Logger log = LoggerFactory.getLogger(IpAddressBaiduCheckerTest.class);
+public class IPAddressBaiduCheckerTest {
+	private static final Logger log = LoggerFactory.getLogger(IPAddressBaiduCheckerTest.class);
 
 	@Test
 	public void check() throws JsonParseException, JsonMappingException, IOException {
-		IpAddressBaiduChecker checker = new IpAddressBaiduChecker();
+		IPAddressBaiduChecker checker = new IPAddressBaiduChecker();
 		
 		IPAddress ip = checker.ipcheck("61.236.238.98");
 		
-		List<IPLocation> locations = ip.getData();
 		
-		log.info(locations.get(0).getLocation());
+		log.info(ip.getIpString());
 		
 	}
 	
@@ -63,7 +64,7 @@ public class IpAddressBaiduCheckerTest {
 		Workbook wb = null;
 		
 		try {
-			IpAddressBaiduChecker checker = new IpAddressBaiduChecker();
+			IPAddressBaiduChecker checker = new IPAddressBaiduChecker();
 			
 			wb = WorkbookFactory.create(new FileInputStream("src/test/resources/data/ip_16.xlsx"));
 			Sheet sheet = wb.getSheetAt(0);
@@ -79,7 +80,7 @@ public class IpAddressBaiduCheckerTest {
 				ipCell = row.getCell(1);
 				locCell = row.getCell(3);
 				
-				IPAddress ip = checker.ipcheck(ipCell.getStringCellValue());
+				BaiduIPBean ip = (BaiduIPBean)checker.ipcheck(ipCell.getStringCellValue());
 				List<IPLocation> locations = ip.getData();
 				
 				if(locations != null && locations.size() > 0){

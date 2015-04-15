@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository;
+package org.ip.repository.bean.ali;
+
+import java.io.Serializable;
 
 import org.ip.repository.bean.IPAddress;
 
@@ -22,9 +24,29 @@ import org.ip.repository.bean.IPAddress;
  *
  * @author Hefei Li
  *
- * @since  Apr 10, 2015
+ * @since Apr 15, 2015
  */
-public interface IpAddressChecker {
+public class AliIPBean extends IPAddress implements Serializable {
 
-	IPAddress ipcheck(String ip) ;
+	private static final long serialVersionUID = -4853982034134533558L;
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public AliIPWrapper getData() {
+		return data;
+	}
+	public void setData(AliIPWrapper data) {
+		this.data = data;
+	}
+	private String code;
+	private AliIPWrapper data = new AliIPWrapper();
+
+	@Override
+	public String getIpString() {
+		return data.toString();
+	}
 }

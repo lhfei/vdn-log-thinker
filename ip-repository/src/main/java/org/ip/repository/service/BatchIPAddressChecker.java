@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository.bean;
+package org.ip.repository.service;
+
+import java.util.List;
 
 /**
  * @version 0.1
@@ -22,7 +24,7 @@ package org.ip.repository.bean;
  *
  * @since  Apr 15, 2015
  */
-public abstract class IPAddress {
+public interface BatchIPAddressChecker<T> {
 
-	public abstract String getIpString();
+	List<T> check(List<String> ips);
 }

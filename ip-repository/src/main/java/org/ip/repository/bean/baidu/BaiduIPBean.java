@@ -13,16 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository.bean;
+package org.ip.repository.bean.baidu;
+
+import java.util.List;
+
+import org.ip.repository.bean.IPAddress;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @version 0.1
  *
  * @author Hefei Li
  *
- * @since  Apr 15, 2015
+ * @since Apr 10, 2015
  */
-public abstract class IPAddress {
+@JsonIgnoreProperties({ "status", "t", "set_cache_time" })
+public class BaiduIPBean extends IPAddress {
 
-	public abstract String getIpString();
+	public List<IPLocation> getData() {
+		return data;
+	}
+
+	public void setData(List<IPLocation> data) {
+		this.data = data;
+	}
+
+	private List<IPLocation> data;
+
+	@Override
+	public String getIpString() {
+		if (data != null && data.size() > 0) {
+			IPLocation location = data.get(0);
+			return location.getLocation();
+		} else
+			return "";
+	}
 }

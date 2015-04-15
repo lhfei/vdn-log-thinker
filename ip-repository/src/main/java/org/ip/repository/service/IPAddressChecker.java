@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository.bean;
+package org.ip.repository.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.ip.repository.bean.IPAddress;
 
 /**
  * @version 0.1
@@ -24,21 +24,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  * @since  Apr 10, 2015
  */
-@JsonIgnoreProperties({"titlecont", "origipquery", "showlamp", "showLikeShare", "shareImage", "ExtendedLocation", "OriginQuery", "tplt", "resourceid" , "fetchkey", "appinfo", "role_id", "disp_type"})
-public class IPLocation {
+public interface IPAddressChecker {
 
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	public String getOrigip() {
-		return origip;
-	}
-	public void setOrigip(String origip) {
-		this.origip = origip;
-	}
-	private String location;
-	private String origip;
+	IPAddress ipcheck(String ip) ;
+	
 }

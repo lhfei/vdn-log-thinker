@@ -13,16 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ip.repository.bean;
+package org.ip.repository.bean.baidu;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @version 0.1
  *
  * @author Hefei Li
  *
- * @since  Apr 15, 2015
+ * @since  Apr 10, 2015
  */
-public abstract class IPAddress {
+@JsonIgnoreProperties({"titlecont", "origipquery", "showlamp", "showLikeShare", "shareImage", "ExtendedLocation", "OriginQuery", "tplt", "resourceid" , "fetchkey", "appinfo", "role_id", "disp_type"})
+public class IPLocation {
 
-	public abstract String getIpString();
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getOrigip() {
+		return origip;
+	}
+	public void setOrigip(String origip) {
+		this.origip = origip;
+	}
+	private String location;
+	private String origip;
 }
