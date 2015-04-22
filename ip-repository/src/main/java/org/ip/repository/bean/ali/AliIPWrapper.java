@@ -30,7 +30,7 @@ public class AliIPWrapper implements Serializable {
 	
 	@Override
 	public String toString() {
-		return this.getCountry() +" "+ getArea() +" "+ getRegion() +" "+ getCity() +" "+ getIsp();
+		return this.getCountry() +"-"+ getArea() +"-"+ getRegion() +"-"+ getCity() +"-"+ getIsp();
 	}
 	
 	public String getCountry() {

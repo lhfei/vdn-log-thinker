@@ -15,10 +15,11 @@
  */
 package org.ip.repository.service.impl;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,9 +28,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ip.repository.bean.ali.AliIPBean;
-import org.ip.repository.bean.ali.AliIPWrapper;
-import org.ip.repository.bean.baidu.BaiduIPBean;
-import org.ip.repository.bean.baidu.IPLocation;
 import org.ip.repository.service.IPAddressChecker;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -66,11 +64,23 @@ public class AliIPAddressCheckerTest {
 	}
 	
 	@Test
-	public void wrap() {
+	public void get() {
+		String[] ins = new String[]{"src/test/resources/data/ip_17.xlsx", "src/test/resources/data/ip_18.xlsx"};
+		String[] outs = new String[]{"src/test/resources/data/ip_17_ali_UTF-8.txt", "src/test/resources/data/ip_18_ali_UTF-8.txt"};
+		
+		for(int i = 0; i < 2; i++){
+			this.wrap(ins[i], outs[i]);
+		}
+	}
+	
+	public void wrap(String input, String output) {
 		Workbook wb = null;
+		PrintWriter pw = null;
 		try {
+			pw = new PrintWriter(output, "UTF-8");
+			
 			IPAddressChecker checker = new AliIPAddressChecker();
-			wb = WorkbookFactory.create(new FileInputStream("src/test/resources/data/ip_16.xlsx"));
+			wb = WorkbookFactory.create(new FileInputStream(input));
 			Sheet sheet = wb.getSheetAt(0);
 			
 			int totalRows = sheet.getPhysicalNumberOfRows();
@@ -79,6 +89,7 @@ public class AliIPAddressCheckerTest {
 			Cell locCell = null;
 			
 			String location = "";
+			String ipString = "";
 			
 			for (int i = 1; i < totalRows; i++) {
 				Row row = sheet.getRow(i);
@@ -87,21 +98,24 @@ public class AliIPAddressCheckerTest {
 				locCell = row.getCell(3);
 				
 				try {
-					AliIPBean ip = (AliIPBean)checker.ipcheck(ipCell.getStringCellValue());
+					ipString = ipCell.getStringCellValue();
+					AliIPBean ip = (AliIPBean)checker.ipcheck(ipString);
 					location = ip.getIpString();
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 					location = "ERROR";
 				} finally{
-					locCell.setCellValue(location);
+					//locCell.setCellValue(location);
+					
+					pw.append(ipString +" "+ location);
+					pw.println();
 				}
-				
 			}
 			
-			wb.write(new FileOutputStream("src/test/resources/data/ip_16_ali.xlsx"));
+			wb.write(new FileOutputStream(output));
 			
 		} catch (InvalidFormatException | IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		} finally {
 			if(wb != null)
 				try {
@@ -109,6 +123,8 @@ public class AliIPAddressCheckerTest {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			pw.flush();
+			pw.close();
 		}
 	}
 

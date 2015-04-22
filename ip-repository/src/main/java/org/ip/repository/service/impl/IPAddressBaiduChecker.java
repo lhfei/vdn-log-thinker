@@ -16,13 +16,11 @@
 package org.ip.repository.service.impl;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.poi.ss.formula.functions.T;
 import org.ip.repository.bean.IPAddress;
 import org.ip.repository.bean.baidu.BaiduIPBean;
 import org.ip.repository.service.IPAddressChecker;

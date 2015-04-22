@@ -72,7 +72,7 @@ public class AliBatchIPAddressCheckerTest {
 		try {
 			BatchIPAddressChecker<AliIPBean> checker = new AliBatchIPAddressChecker();
 			
-			wb = WorkbookFactory.create(new FileInputStream("src/test/resources/data/ip_16.xlsx"));
+			wb = WorkbookFactory.create(new FileInputStream("src/test/resources/data/ip_18.xlsx"));
 			Sheet sheet = wb.getSheetAt(0);
 			
 			int totalRows = sheet.getPhysicalNumberOfRows();
@@ -91,7 +91,7 @@ public class AliBatchIPAddressCheckerTest {
 			List<AliIPBean> locations = checker.check(ips);
 			String location = "";
 			
-			for (int i = 0; i < totalRows; i++) {
+			for (int i = 1; i < totalRows; i++) {
 				Row row = sheet.getRow(i);
 				locCell = row.getCell(3);
 				
@@ -111,7 +111,7 @@ public class AliBatchIPAddressCheckerTest {
 				throw new RuntimeException("Batch executed error. Some one IP location not be checked.");
 			}*/
 			
-			wb.write(new FileOutputStream("src/test/resources/data/ip_16_Alibaba.xlsx"));
+			wb.write(new FileOutputStream("src/test/resources/data/ip_18_Alibaba.xlsx"));
 			
 		} catch (InvalidFormatException | IOException e) {
 			e.printStackTrace();

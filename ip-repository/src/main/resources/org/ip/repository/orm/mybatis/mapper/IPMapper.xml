@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ip.repository.orm.mybatis.mapper.IPMapper">
+	
+	<insert id="createAliIP" parameterType="list" useGeneratedKeys="false">
+		insert into ip_repository (IP,COUNTRY , AREA, REGION , CITY , ISP, TOTAL )
+		
+		VALUE 
+		
+		<foreach collection="list" item="model" separator=","> 
+	        (           
+	            #{model.ip}, #{model.country}, #{model.area}, #{model.region}, #{model.city}, #{model.isp}, #{model.total}     
+	        )
+	    </foreach>
+		
+	</insert>
+	
+</mapper>
