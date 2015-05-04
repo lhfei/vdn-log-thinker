@@ -45,11 +45,11 @@ public class IPCheckApp {
 		PrintWriter pw = null;
 		try {
 			
-			pw = new PrintWriter(new FileOutputStream("src/test/resources/data/IP_FULLY.txt"), true);
+			pw = new PrintWriter(new FileOutputStream("src/test/resources/data/CDN_BAD.txt"), true);
 			
 			AliIPAddressChecker ipChecker = new AliIPAddressChecker();
 
-			wb = WorkbookFactory.create(new FileInputStream("src/test/resources/data/IP_FULLY2.xlsx"));
+			wb = WorkbookFactory.create(new FileInputStream("src/test/resources/data/CDN_BAD.xlsx"));
 			Sheet sheet = wb.getSheetAt(0);
 
 			int totalRows = sheet.getPhysicalNumberOfRows();

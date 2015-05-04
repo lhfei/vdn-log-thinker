@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     
     	<typeAlias type="org.ip.repository.bean.ali.AliIPWrapper" alias="aliIPWrapper"/>
     	
+    	<typeAlias type="org.ip.repository.bean.IPLocModel" alias="ipLocModel"/>
+    	<typeAlias type="org.ip.repository.bean.ErrLocModel" alias="errLocModel"/>
+    	
+    	
     	<typeAlias type="org.ip.repository.bean.IPModel" alias="ipModel"/>
         
         

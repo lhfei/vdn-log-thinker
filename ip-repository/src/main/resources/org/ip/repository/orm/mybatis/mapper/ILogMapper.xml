@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ip.repository.orm.mybatis.mapper.ILogMapper">
+	
+	
+	<insert id="createErrLocModel" parameterType="list" useGeneratedKeys="false">
+		INSERT INTO GROUP_ERR_LOC (DATE, ERR , LOC, TOTAL )
+		
+		VALUE 
+		
+		<foreach collection="list" item="model" separator=","> 
+	        (           
+	            #{model.auditDate}, #{model.err}, #{model.loc}, #{model.total}     
+	        )
+	    </foreach>
+		
+	</insert>
+
+	<insert id="createIPLocModel" parameterType="list" useGeneratedKeys="false">
+		INSERT INTO GROUP_IP_LOC (IP, LOC, TOTAL )
+		
+		VALUE 
+		
+		<foreach collection="list" item="model" separator=","> 
+	        (           
+	            #{model.ip}, #{model.loc}, #{model.total}     
+	        )
+	    </foreach>
+		
+	</insert>	
+	
+	
+</mapper>
