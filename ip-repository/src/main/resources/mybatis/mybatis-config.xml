@@ -11,13 +11,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     </settings>
     <typeAliases>
     
-    	<typeAlias type="org.ip.repository.bean.ali.AliIPWrapper" alias="aliIPWrapper"/>
+    	<typeAlias type="com.ifeng.vdn.ip.repository.bean.ali.AliIPWrapper" alias="aliIPWrapper"/>
     	
-    	<typeAlias type="org.ip.repository.bean.IPLocModel" alias="ipLocModel"/>
-    	<typeAlias type="org.ip.repository.bean.ErrLocModel" alias="errLocModel"/>
+    	<typeAlias type="com.ifeng.vdn.ip.repository.bean.IPLocModel" alias="ipLocModel"/>
+    	<typeAlias type="com.ifeng.vdn.ip.repository.bean.ErrLocModel" alias="errLocModel"/>
     	
     	
-    	<typeAlias type="org.ip.repository.bean.IPModel" alias="ipModel"/>
+    	<typeAlias type="com.ifeng.vdn.ip.repository.bean.IPModel" alias="ipModel"/>
         
         
     </typeAliases>
