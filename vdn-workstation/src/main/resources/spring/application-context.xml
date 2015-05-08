@@ -10,8 +10,14 @@
 		<property name="locations">
 			<list>
 				<value>classpath*:spring/application.properties</value>
+				<value>classpath*:spring/hadoop.properties</value>
+				<value>classpath*:spring/hive.properties</value>
+				<value>classpath*:spring/hive-server.properties</value>
 			</list>
 		</property>
 	</bean>
+	
+	<import resource="classpath:spring/hadoop-context.xml" />
+	<import resource="classpath:spring/hive-context.xml" />
 	
 </beans>
