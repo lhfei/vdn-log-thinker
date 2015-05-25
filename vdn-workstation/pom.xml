@@ -167,6 +167,6 @@
 	<properties>
 		<spring.version>4.1.5.RELEASE</spring.version>
 		<spring-hadoop.version>2.1.2.RELEASE</spring-hadoop.version>
-		<hive.version>0.14.0</hive.version>
+		<hive.version>1.1.0</hive.version>
 	</properties>
 </project>

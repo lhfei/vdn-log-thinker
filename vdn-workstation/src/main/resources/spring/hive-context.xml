@@ -20,7 +20,7 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 	
-	<hadoop:configuration>
+	<hadoop:configuration id="hadoopConfiguration">
 		fs.default.name=${hd.fs}
 		mapred.job.tracker=${hd.jt}
 	</hadoop:configuration>

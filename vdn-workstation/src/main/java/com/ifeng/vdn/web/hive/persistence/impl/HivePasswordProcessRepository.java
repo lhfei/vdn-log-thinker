@@ -53,7 +53,7 @@ public class HivePasswordProcessRepository implements PasswordProcessRepository 
 	public void processPasswordFile(String inputFile) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("inputFile", inputFile);
-		hiveOperations.query("classpath:password-analysis.hql", parameters);		
+		hiveOperations.query("/home/cloudland/app_tmp/password-analysis.hql", parameters);		
 	}
 
 

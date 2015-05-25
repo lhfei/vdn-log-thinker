@@ -17,9 +17,8 @@ package com.ifeng.vdn.web.hive.service.impl;
 
 import java.util.List;
 
-import org.apache.hadoop.hive.service.HiveClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.hadoop.hive.HiveClientCallback;
+import org.springframework.data.hadoop.hive.HiveOperations;
 import org.springframework.data.hadoop.hive.HiveTemplate;
 import org.springframework.stereotype.Service;
 
@@ -49,12 +48,15 @@ public class PasswordProcessServiceImpl implements PasswordProcessService {
 
 	@Override
 	 public List<String> getDbs() {
-		return hiveTemplate.execute(new HiveClientCallback<List<String>>() {
+		/*return hiveTemplate.execute(new HiveClientCallback<List<String>>() {
 			 @Override
 	         public List<String> doInHive(HiveClient hiveClient) throws Exception {
 	            return hiveClient.get_all_databases();
 	         }
-		});
+		});*/
+		
+		
+		return hiveOperations.query("SHOW TABLES;");
 	  }
 	
 	@Autowired
@@ -62,4 +64,7 @@ public class PasswordProcessServiceImpl implements PasswordProcessService {
 	
 	@Autowired
 	private HiveTemplate hiveTemplate;
+	
+	@Autowired
+	private HiveOperations hiveOperations;
 }

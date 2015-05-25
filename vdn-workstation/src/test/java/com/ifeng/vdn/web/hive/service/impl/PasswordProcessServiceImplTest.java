@@ -17,6 +17,7 @@ package com.ifeng.vdn.web.hive.service.impl;
 
 import java.util.List;
 
+import org.apache.hive.service.server.HiveServer2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,10 @@ import com.ifeng.vdn.web.hive.test.BaseTestSuite;
 public class PasswordProcessServiceImplTest extends BaseTestSuite {
 
 	@Test
-	public void count() {
+	public void getDbs() {
 //		ThriftHiveProcessorFactory f = null;
+		
+		HiveServer2 server = null;
 		
 		passwordProcessService.processPasswordFile("/etc/passwd");
 		
