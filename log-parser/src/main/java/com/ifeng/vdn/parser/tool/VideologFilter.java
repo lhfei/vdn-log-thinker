@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ifeng.vdn.parser;
+package com.ifeng.vdn.parser.tool;
 
-import java.io.IOException;
-
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Reducer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @version 0.1
@@ -29,21 +26,18 @@ import org.slf4j.LoggerFactory;
  *
  * @since  May 25, 2015
  */
-public class VideoLogParseReducer extends
-		Reducer<Text, Text, Text, Text>	 {
-	
-	private static final Logger log = LoggerFactory.getLogger(VideoLogParseReducer.class);
+public class VideologFilter {
 
-	/* (non-Javadoc)
-	 * @see org.apache.hadoop.mapreduce.Reducer#reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer.Context)
+	/**
+	 * 
 	 */
-	@Override
-	protected void reduce(Text arg0, Iterable<Text> arg1,
-			Reducer<Text, Text, Text, Text>.Context arg2) throws IOException,
-			InterruptedException {
-		
-		
-	}
-
+	public static Set<String> VALID_ERR_CODE = new TreeSet<String>(
+			Arrays.asList("208000", "303000", "301010", "301020", "301030",
+					"601000", "602000"));
 	
+	/**
+	 * 
+	 */
+	public static Set<String> VALID_PLAYER_VERSION = new TreeSet<String>(
+			Arrays.asList("VZHPlayer_zhvp1.0.16", "vNsPlayer_nsvp1.0.18"));
 }

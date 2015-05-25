@@ -42,7 +42,18 @@ public class VideoLogParseMapper extends
 	protected void map(LongWritable key, Text value,
 			Mapper<LongWritable, Text, Text, Text>.Context context)
 			throws IOException, InterruptedException {
-		super.map(key, value, context);
+		
+		if(value != null) {
+			String[] items = value.toString().split("\t");
+			if(items.length == 24){
+				log.info("Key[{}]    Value>>>>{}", key, value.toString());
+				
+				if(items[20].endsWith("zhvp1.0.16") || items[20].endsWith("nsvp1.0.18")){
+					context.write(new Text("items[20]"), value);
+				}
+			}
+		}
+		
 	}
 
 	
