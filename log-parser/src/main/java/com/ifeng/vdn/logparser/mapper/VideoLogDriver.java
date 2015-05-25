@@ -55,11 +55,11 @@ public class VideoLogDriver extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		/*String input = "src/test/resources/input/videolog/0000.sta";
-		String output = "src/test/resources/output/log";*/
+		String input = "src/test/resources/input/videolog/0000.sta";
+		String output = "src/test/resources/output/log";
 		
-		String input = "/home/lhfei/app_tmp/2015-03-05.log.gz";
-		String output = "src/test/resources/output/log2";
+		/*String input = "/home/lhfei/app_tmp/2015-03-05.log.gz";
+		String output = "src/test/resources/output/log2";*/
 		if (args == null || args.length != 2) {
 			args = new String[] {input, output};
 		}
