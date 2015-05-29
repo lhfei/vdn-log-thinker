@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.ifeng.vdn.loggroup.tool.VideologPair;
+
 /**
  * @version 0.1
  *
@@ -40,4 +42,71 @@ public class VideologFilter {
 	 */
 	public static Set<String> VALID_PLAYER_VERSION = new TreeSet<String>(
 			Arrays.asList("VZHPlayer_zhvp1.0.16", "vNsPlayer_nsvp1.0.18"));
+	
+	public static VideologPair filte(String origin){
+		VideologPair pair = null;
+		
+		try {
+			if(null != origin && origin.length() > 0){
+				String[] items = origin.toString().split("\t");
+				
+				if(items.length == 24){
+					if(null != items[20] && "vNsPlayer_nsvp1.0.18".equals(items[20])){
+						StringBuilder sb = new StringBuilder();
+						pair = new VideologPair(items[15]);
+						
+						sb.append(items[2]);
+						sb.append("\t");
+						
+						sb.append(items[3]);
+						sb.append("\t");
+						
+						sb.append(items[4]);
+						sb.append("\t");
+						
+						sb.append(items[5]);
+						sb.append("\t");
+						
+						sb.append(items[8]);
+						sb.append("\t");
+						
+						sb.append(items[11]);
+						sb.append("\t");
+						
+						sb.append(items[12]);
+						sb.append("\t");
+						
+						sb.append(items[14]);
+						sb.append("\t");
+						
+						/*sb.append(items[15]);
+						sb.append("\t");*/
+						
+						sb.append(items[16]);
+						sb.append("\t");
+						
+						sb.append(items[17]);
+						sb.append("\t");
+						
+						sb.append(items[18]);
+						sb.append("\t");
+						
+						sb.append(items[20]);
+						sb.append("\t");
+						
+						sb.append(items[22]);
+						sb.append("\t");
+						
+						sb.append(items[23]);
+						
+						pair.setValue(sb.toString());
+					}
+				}
+			}
+		} catch (Exception e) {
+		}
+		
+		return pair;
+	}
+	
 }

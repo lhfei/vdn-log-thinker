@@ -30,6 +30,7 @@
 -----------------------------------------------------------------------------------------------------
 -- 日志文件参考标量
 -----------------------------------------------------------------------------------------------------
+16	err	EventRetCode ＝ EventCode（1位）+ActionCode（2位）+Data（3位） 详见下表	err=100000
 3	ip	用户IP地址	
 4	ref	视频所在页面url	ref=http://v.ifeng.com/v/news/djmdnz/index.shtml#01c92b9c-37c7-4510-ac87-519a1224c263
 5	sid	注册用户的用户名，取cookie[‘sid’]	sid=3232F65C8864C995D82D087D8A15FF05kzzxc1
@@ -38,7 +39,6 @@
 12	tm	当前系统时间戳，毫秒级	tm=1424048309234
 13	url	视频存储的地址	url=http://ips.ifeng.com/video19.ifeng.com/video09/2015/02/15/2999516-102-2028.mp4
 15	dur	视频总时长，取自XML	dur=155
-16	err	EventRetCode ＝ EventCode（1位）+ActionCode（2位）+Data（3位） 详见下表	err=100000
 17	bt	文件总大小（B）	bt=12451187
 18	bl	已加载文件大小（B）	bl=12451187
 19	lt	加载文件耗时（毫秒）	lt=139059

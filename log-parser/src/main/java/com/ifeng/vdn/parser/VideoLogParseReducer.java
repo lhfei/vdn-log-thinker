@@ -34,14 +34,16 @@ public class VideoLogParseReducer extends
 	
 	private static final Logger log = LoggerFactory.getLogger(VideoLogParseReducer.class);
 
-	/* (non-Javadoc)
-	 * @see org.apache.hadoop.mapreduce.Reducer#reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer.Context)
+	/**
 	 */
 	@Override
-	protected void reduce(Text arg0, Iterable<Text> arg1,
-			Reducer<Text, Text, Text, Text>.Context arg2) throws IOException,
+	protected void reduce(Text key, Iterable<Text> values,
+			Reducer<Text, Text, Text, Text>.Context context) throws IOException,
 			InterruptedException {
-		
+		for(Text value : values){
+			
+			context.write(key, value);
+		}
 		
 	}
 
