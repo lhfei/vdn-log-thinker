@@ -15,7 +15,9 @@
  */
 package com.ifeng.vdn.parser.tool;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,6 +31,8 @@ import com.ifeng.vdn.loggroup.tool.VideologPair;
  * @since  May 25, 2015
  */
 public class VideologFilter {
+	
+	private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
 
 	/**
 	 * 
@@ -70,7 +74,7 @@ public class VideologFilter {
 						sb.append(items[8]);
 						sb.append("\t");
 						
-						sb.append(items[11]);
+						sb.append(format.format(new Date(Long.parseLong(items[11]))));
 						sb.append("\t");
 						
 						sb.append(items[12]);
