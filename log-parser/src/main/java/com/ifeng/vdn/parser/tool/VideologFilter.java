@@ -15,9 +15,7 @@
  */
 package com.ifeng.vdn.parser.tool;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,8 +29,6 @@ import com.ifeng.vdn.loggroup.tool.VideologPair;
  * @since  May 25, 2015
  */
 public class VideologFilter {
-	
-	private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:sss");
 
 	/**
 	 * 
@@ -68,13 +64,13 @@ public class VideologFilter {
 						sb.append(items[4]);
 						sb.append("\t");
 						
-						sb.append(items[5]);
+						sb.append(items[5]);	//uid
 						sb.append("\t");
 						
 						sb.append(items[8]);
 						sb.append("\t");
 						
-						sb.append(format.format(new Date(Long.parseLong(items[11]))));
+						sb.append(items[11]);
 						sb.append("\t");
 						
 						sb.append(items[12]);
@@ -95,13 +91,16 @@ public class VideologFilter {
 						sb.append(items[18]);
 						sb.append("\t");
 						
-						sb.append(items[20]);
+						sb.append(items[20]);	// vid
 						sb.append("\t");
 						
 						sb.append(items[22]);
 						sb.append("\t");
 						
 						sb.append(items[23]);
+						sb.append("\t");
+						
+						sb.append(items[5] +"-"+ items[20]);	//kye: uid '-' vid
 						
 						pair.setValue(sb.toString());
 					}
