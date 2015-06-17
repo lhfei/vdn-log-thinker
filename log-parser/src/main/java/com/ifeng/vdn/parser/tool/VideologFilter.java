@@ -100,7 +100,7 @@ public class VideologFilter {
 						sb.append(items[23]);
 						sb.append("\t");
 						
-						sb.append(items[5] +"-"+ items[20]);	//kye: uid '-' vid
+						sb.append(items[5] +"-"+ items[0]);	//kye: uid '-' id
 						
 						pair.setValue(sb.toString());
 					}

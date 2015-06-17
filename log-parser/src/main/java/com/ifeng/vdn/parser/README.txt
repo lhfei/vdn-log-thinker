@@ -45,5 +45,5 @@
 21	vid	播放器版本	vid=vNsPlayer_nsvp1.0.18
 23	cdnId	标记CDN（Sooner-赛维，Chinanet-网宿，Chinacache-蓝讯） （直播需要，非直播留空）	cdnId=ifengP2P
 24	netname	运营商 （直播需要，非直播留空）	netname=移动
-00  key: uid +'-'+ vid
+00  key: uid +'-'+ id
 -----------------------------------------------------------------------------------------------------
