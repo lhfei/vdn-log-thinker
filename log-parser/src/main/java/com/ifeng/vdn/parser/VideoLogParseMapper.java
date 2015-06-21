@@ -20,6 +20,7 @@ import java.io.IOException;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,7 +68,16 @@ public class VideoLogParseMapper extends
 			throws IOException, InterruptedException {
 		
 		if(value != null) {
-			VideologPair pair = VideologFilter.filte(value.toString());
+			String ds = "";
+			FileSplit split = (FileSplit)context.getInputSplit();
+			String parentPath = split.getPath().getParent().toString();
+			String[] parents = parentPath.split("/");
+			if(parents.length > 0){
+				ds = parents[parents.length - 1];
+			}
+			
+			VideologPair pair = VideologFilter.filte(value.toString(), ds);
+			
 			if(pair != null && pair.getKey() != null && pair.getValue() != null){
 				context.write(new Text(pair.getKey()), new Text(pair.getValue()));
 			}

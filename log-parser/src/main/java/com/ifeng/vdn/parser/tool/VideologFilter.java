@@ -15,7 +15,9 @@
  */
 package com.ifeng.vdn.parser.tool;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,6 +31,8 @@ import com.ifeng.vdn.loggroup.tool.VideologPair;
  * @since  May 25, 2015
  */
 public class VideologFilter {
+	
+	private static final String INVALID_DATE_STR = "####-##-##";
 
 	/**
 	 * 
@@ -43,7 +47,24 @@ public class VideologFilter {
 	public static Set<String> VALID_PLAYER_VERSION = new TreeSet<String>(
 			Arrays.asList("VZHPlayer_zhvp1.0.16", "vNsPlayer_nsvp1.0.18"));
 	
-	public static VideologPair filte(String origin){
+	public static String formatDate(String dateStr) {
+		try {
+			if(null != dateStr && dateStr.trim().length() > 0){
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				long tm = Long.parseLong(dateStr);
+				Date date = new Date(tm);
+				
+				dateStr = sf.format(date);
+			}else{
+				dateStr = INVALID_DATE_STR;
+			}
+		} catch (NumberFormatException e) {
+			dateStr = INVALID_DATE_STR;
+		}
+		return dateStr;
+	}
+	
+	public static VideologPair filte(String origin, String ds){
 		VideologPair pair = null;
 		
 		try {
@@ -70,7 +91,7 @@ public class VideologFilter {
 						sb.append(items[8]);
 						sb.append("\t");
 						
-						sb.append(items[11]);
+						sb.append(formatDate(items[11]));	//tm
 						sb.append("\t");
 						
 						sb.append(items[12]);
@@ -101,6 +122,9 @@ public class VideologFilter {
 						sb.append("\t");
 						
 						sb.append(items[5] +"-"+ items[0]);	//kye: uid '-' id
+						sb.append("\t");
+						
+						sb.append(ds);
 						
 						pair.setValue(sb.toString());
 					}

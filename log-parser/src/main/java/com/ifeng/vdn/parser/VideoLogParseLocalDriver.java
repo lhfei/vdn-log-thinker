@@ -29,8 +29,6 @@ import org.apache.hadoop.util.ToolRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ifeng.vdn.logparser.mapper.VideoLogReducer;
-
 /**
  * @version 0.1
  *
@@ -54,7 +52,7 @@ public class VideoLogParseLocalDriver extends Configured implements Tool {
 
 		job.setMapperClass(VideoLogParseMapper.class);
 		job.setReducerClass(VideoLogParseReducer.class);
-		//job.setCombinerClass(VideoLogParseReducer.class);
+		job.setCombinerClass(VideoLogParseReducer.class);
 
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
@@ -65,8 +63,11 @@ public class VideoLogParseLocalDriver extends Configured implements Tool {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String input = "/home/lhfei/app_tmp/vdnlog/2015-05-21/*.gz";
-		String output = "/home/lhfei/app_tmp/vdnlog/output/";
+		String input = "/home/lhfei/app_tmp/vdnlog/input/*/*.gz";
+		String output = "/home/lhfei/app_tmp/vdnlog/output/*/";
+		
+		//String input = "/home/lhfei/app_tmp/vdnlog/result_ALL.txt";
+		//String output = "/home/lhfei/app_tmp/vdnlog/output/";
 		
 		if (args == null || args.length != 2) {
 			args = new String[] {input, output};
