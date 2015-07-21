@@ -64,12 +64,28 @@ public class VideologFilter {
 		return dateStr;
 	}
 	
+	public static int getVType(String cat) {
+		int code = -1;
+		if(null == cat){
+			return code;
+		}else {
+			cat  = cat.trim();
+			if("#".equals(cat)){
+				code = VType.IRREGULARITY;
+			}else{
+				code = (cat.startsWith("0029-")) ? VType.DOCUMENTARY : VType.NEWSREEL;
+			}
+			
+			return code;
+		}
+	}
+	
 	public static VideologPair filte(String origin, String ds){
 		VideologPair pair = null;
-		
 		try {
 			if(null != origin && origin.length() > 0){
-				String[] items = origin.toString().split("\t");
+				String separator = "\t";
+				String[] items = origin.toString().split(separator);
 				
 				if(items.length == 24){
 					if(null != items[20] && "vNsPlayer_nsvp1.0.18".equals(items[20])){
@@ -77,52 +93,55 @@ public class VideologFilter {
 						pair = new VideologPair(items[15]);
 						
 						sb.append(items[2]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[3]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[4]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[5]);	//uid
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[8]);
-						sb.append("\t");
+						sb.append(separator);
+						
+						sb.append(getVType(items[9]));	//cat
+						sb.append(separator);
 						
 						sb.append(formatDate(items[11]));	//tm
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[12]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[14]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						/*sb.append(items[15]);
 						sb.append("\t");*/
 						
 						sb.append(items[16]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[17]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[18]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[20]);	// vid
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[22]);
-						sb.append("\t");
+						sb.append(separator);
 						
 						sb.append(items[23]);
-						sb.append("\t");
+						sb.append(separator);
 						
-						sb.append(items[5] +"-"+ items[0]);	//kye: uid '-' id
-						sb.append("\t");
+						/*sb.append(items[5] +"-"+ items[0]);	//kye: uid '-' id
+						sb.append(separator);*/
 						
 						sb.append(ds);
 						
@@ -135,5 +154,36 @@ public class VideologFilter {
 		
 		return pair;
 	}
+	
+}
+
+
+/**
+ * \u89c6\u9891\u7c7b\u578b </p>
+ * 
+ * <ul>
+ * 	<li>\u65b0\u95fb\u77ed\u7247 <tt>[0]</tt></li>
+ * 	<li>\u7eaa\u5f55\u7247 <tt>[0]</tt></li>
+ * 	<li>\u4e0d\u89c4\u5219\u6027\u7684\u7c7b\u578b\uff0c\u4ee3\u7801\u4e3a# <tt>[999]</tt></li>
+ * </ul>
+ * @author Hefei Li
+ *
+ */
+class VType {
+	
+	/**
+	 * \u65b0\u95fb\u77ed\u7247
+	 */
+	public static final int NEWSREEL = 0;
+	
+	/**
+	 * \u7eaa\u5f55\u7247
+	 */
+	public static final int DOCUMENTARY = 1;
+	
+	/**
+	 * \u4e0d\u89c4\u5219\u6027\u7684\u7c7b\u578b\uff0c\u4ee3\u7801\u4e3a#
+	 */
+	public static final int IRREGULARITY = 999;
 	
 }
