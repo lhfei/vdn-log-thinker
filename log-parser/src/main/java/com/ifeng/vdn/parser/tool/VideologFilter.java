@@ -80,12 +80,18 @@ public class VideologFilter {
 		}
 	}
 	
-	public static VideologPair filte(String origin, String ds){
+	public static VideologPair filte(String origin, String ds, String tm){
 		VideologPair pair = null;
 		try {
 			if(null != origin && origin.length() > 0){
 				String separator = "\t";
 				String[] items = origin.toString().split(separator);
+				
+				String hour = tm.substring(0,2);
+				String minutes = tm.substring(2, 4);
+				String timestamp = ds +" "+ hour + ':' +minutes; 
+				
+				int tr = ((Integer.parseInt(minutes) / 10) + 1) * 10;	//time range, for example: 15:03 will be pass into range 15:10
 				
 				if(items.length == 24){
 					if(null != items[20] && "vNsPlayer_nsvp1.0.18".equals(items[20])){
@@ -110,7 +116,8 @@ public class VideologFilter {
 						sb.append(getVType(items[9]));	//cat
 						sb.append(separator);
 						
-						sb.append(formatDate(items[11]));	//tm
+						//sb.append(formatDate(items[11]));	//tm
+						sb.append(timestamp);
 						sb.append(separator);
 						
 						sb.append(items[12]);
@@ -144,6 +151,9 @@ public class VideologFilter {
 						sb.append(separator);*/
 						
 						sb.append(ds);
+						sb.append(separator);
+						
+						sb.append(hour + ":" +tr);
 						
 						pair.setValue(sb.toString());
 					}

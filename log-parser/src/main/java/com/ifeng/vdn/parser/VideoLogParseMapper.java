@@ -71,12 +71,16 @@ public class VideoLogParseMapper extends
 			String ds = "";
 			FileSplit split = (FileSplit)context.getInputSplit();
 			String parentPath = split.getPath().getParent().toString();
+
+			String fileName = split.getPath().getName();
+			fileName = fileName.substring(0, 4);
+			
 			String[] parents = parentPath.split("/");
 			if(parents.length > 0){
 				ds = parents[parents.length - 1];
 			}
 			
-			VideologPair pair = VideologFilter.filte(value.toString(), ds);
+			VideologPair pair = VideologFilter.filte(value.toString(), ds, fileName);
 			
 			if(pair != null && pair.getKey() != null && pair.getValue() != null){
 				context.write(new Text(pair.getKey()), new Text(pair.getValue()));
