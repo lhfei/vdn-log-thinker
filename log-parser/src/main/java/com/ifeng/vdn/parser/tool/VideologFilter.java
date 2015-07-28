@@ -42,10 +42,12 @@ public class VideologFilter {
 					"601000", "602000"));
 	
 	/**
-	 * 
+	 * <ol><tt>播放器版本统计对象</tt></br>
+	 * 	<li>ExtPlayer_V5.3.3 站外播放器
+	 * 	<li>vNsPlayer_nsvp1.0.18
 	 */
 	public static Set<String> VALID_PLAYER_VERSION = new TreeSet<String>(
-			Arrays.asList("VZHPlayer_zhvp1.0.16", "vNsPlayer_nsvp1.0.18"));
+			Arrays.asList("VZHPlayer_zhvp1.0.16", "vNsPlayer_nsvp1.0.18", "ExtPlayer_V5.3.3"));
 	
 	public static String formatDate(String dateStr) {
 		try {
@@ -94,66 +96,62 @@ public class VideologFilter {
 				int tr = ((Integer.parseInt(minutes) / 10) + 1) * 10;	//time range, for example: 15:03 will be pass into range 15:10
 				
 				if(items.length == 24){
-					if(null != items[20] && "vNsPlayer_nsvp1.0.18".equals(items[20])){
+					String vplayer = items[20];
+					
+					if(VPlayer.isValid(vplayer)){
+						
 						StringBuilder sb = new StringBuilder();
-						pair = new VideologPair(items[15]);
+						pair = new VideologPair(items[15]);		//err
 						
-						sb.append(items[2]);
+						sb.append(items[2]);	//ip
 						sb.append(separator);
 						
-						sb.append(items[3]);
+						sb.append(items[3]);	//ref
 						sb.append(separator);
 						
-						sb.append(items[4]);
+						sb.append(items[4]);	//sid
 						sb.append(separator);
 						
 						sb.append(items[5]);	//uid
 						sb.append(separator);
 						
-						sb.append(items[8]);
+						sb.append(items[8]);	//loc
 						sb.append(separator);
 						
 						sb.append(getVType(items[9]));	//cat
 						sb.append(separator);
 						
-						//sb.append(formatDate(items[11]));	//tm
-						sb.append(timestamp);
+						sb.append(timestamp);	//tm
 						sb.append(separator);
 						
-						sb.append(items[12]);
+						sb.append(items[12]);	//url
 						sb.append(separator);
 						
-						sb.append(items[14]);
+						sb.append(items[14]);	//dur
 						sb.append(separator);
 						
-						/*sb.append(items[15]);
-						sb.append("\t");*/
-						
-						sb.append(items[16]);
+						sb.append(items[16]);	//bt
 						sb.append(separator);
 						
-						sb.append(items[17]);
+						sb.append(items[17]);	//bl
 						sb.append(separator);
 						
-						sb.append(items[18]);
+						sb.append(items[18]);	//lt
 						sb.append(separator);
 						
 						sb.append(items[20]);	// vid
 						sb.append(separator);
 						
-						sb.append(items[22]);
+						sb.append(items[22]);	//cdnId
 						sb.append(separator);
 						
-						sb.append(items[23]);
+						sb.append(items[23]);	//netname
 						sb.append(separator);
 						
-						/*sb.append(items[5] +"-"+ items[0]);	//kye: uid '-' id
-						sb.append(separator);*/
-						
-						sb.append(ds);
+						sb.append(ds);			//ct
 						sb.append(separator);
 						
-						sb.append(hour + ":" +tr);
+						sb.append(hour + ":" +tr);	//tr
 						
 						pair.setValue(sb.toString());
 					}
@@ -167,6 +165,38 @@ public class VideologFilter {
 	
 }
 
+/**
+ * 播放器统计对象<p>
+ * <ol><tt>播放器版本统计对象</tt></br>
+ * 	<li>ExtPlayer_V5.3.3 站外播放器
+ * 	<li>vNsPlayer_nsvp1.0.18
+ * @author Hefei Li
+ *
+ */
+class VPlayer  {
+	
+	/**
+	 *  牛市播放器
+	 */
+	public static final String NS_Major = "vNsPlayer_nsvp1.0.18";
+	
+	/**
+	 *  站外播放器
+	 */
+	public static final String ZW_Major = "ExtPlayer_V5.3.3";
+	
+	public static boolean isValid(String player) {
+		if(player != null){
+			if(player.equals(NS_Major) || player.equals(ZW_Major)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+}
 
 /**
  * \u89c6\u9891\u7c7b\u578b </p>
