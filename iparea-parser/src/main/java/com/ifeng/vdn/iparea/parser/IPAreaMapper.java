@@ -49,7 +49,7 @@ public class IPAreaMapper extends Mapper<LongWritable, Text, Text, Text> {
 			List<String> ips = IPV4Handler.getAllFromRange(start, end);
 			
 			for(String ip : ips) {
-				StringBuilder sb = new StringBuilder(ip);
+				StringBuilder sb = new StringBuilder();
 				//sb.append("\t");
 				
 				sb.append(items[2]);
