@@ -21,8 +21,6 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.ifeng.vdn.loggroup.tool.VideologPair;
 import com.ifeng.vdn.parser.tool.VideologFilter;
@@ -36,8 +34,6 @@ import com.ifeng.vdn.parser.tool.VideologFilter;
  */
 public class VideoLogParseMapper extends
 		Mapper<LongWritable, Text, Text, Text> {
-	
-	private static final Logger log = LoggerFactory.getLogger(VideoLogParseMapper.class);
 
 	/**
 	 * <code>

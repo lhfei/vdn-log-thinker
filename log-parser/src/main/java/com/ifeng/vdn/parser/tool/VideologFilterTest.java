@@ -13,31 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ifeng.vdn.parser;
+package com.ifeng.vdn.parser.tool;
 
-import java.io.IOException;
-
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Reducer;
+import com.ifeng.vdn.loggroup.tool.VideologPair;
 
 /**
  * @version 0.1
  *
  * @author Hefei Li
  *
- * @since  May 25, 2015
+ * @since  Jul 31, 2015
  */
-public class VideoLogParseReducer extends
-		Reducer<Text, Text, Text, Text>	 {
-	/**
-	 */
-	@Override
-	protected void reduce(Text key, Iterable<Text> values,
-			Reducer<Text, Text, Text, Text>.Context context) throws IOException,
-			InterruptedException {
-		for(Text value : values){
-			
-			context.write(key, value);
-		}
+public class VideologFilterTest {
+
+	public static void main(String[] args) {
+		String origin = "4AC51C17-9FBE-47F2-8EE0-8285A66EAFF5	#	124.236.154.36	http://v.ifeng.com/live/#4AC51C17-9FBE-47F2-8EE0-8285A66EAFF5	#	1345205484375_7037	#	live	#	0017	#	1438311540986	#	#	#	702020	0	0	0	#	vLivePlayer_v5.0.51_p	0017	ifengP2P	电信";
+	
+		VideologPair pair = VideologFilter.filte(origin, "2015-07-30", "0959");
+		
+		System.out.println(pair.getValue());
 	}
+
 }

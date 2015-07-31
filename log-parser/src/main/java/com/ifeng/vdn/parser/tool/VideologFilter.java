@@ -38,7 +38,9 @@ public class VideologFilter {
 	 * 
 	 */
 	public static Set<String> VALID_ERR_CODE = new TreeSet<String>(
-			Arrays.asList("208000", "303000", "301010", "301020", "301030",
+			Arrays.asList("208000", "303000", 
+					"301010", "301020", "301030",
+					"304001", "304002", "304003", "304004", 
 					"601000", "602000"));
 	
 	/**
@@ -66,21 +68,6 @@ public class VideologFilter {
 		return dateStr;
 	}
 	
-	public static int getVType(String cat) {
-		int code = -1;
-		if(null == cat){
-			return code;
-		}else {
-			cat  = cat.trim();
-			if("#".equals(cat)){
-				code = VType.IRREGULARITY;
-			}else{
-				code = (cat.startsWith("0029-")) ? VType.DOCUMENTARY : VType.NEWSREEL;
-			}
-			
-			return code;
-		}
-	}
 	
 	public static VideologPair filte(String origin, String ds, String tm){
 		VideologPair pair = null;
@@ -89,72 +76,83 @@ public class VideologFilter {
 				String separator = "\t";
 				String[] items = origin.toString().split(separator);
 				
+				String trString = "";
 				String hour = tm.substring(0,2);
 				String minutes = tm.substring(2, 4);
-				String timestamp = ds +" "+ hour + ':' +minutes; 
-				
 				int tr = ((Integer.parseInt(minutes) / 10) + 1) * 10;	//time range, for example: 15:03 will be pass into range 15:10
 				
-				if(items.length == 24){
-					String vplayer = items[20];
-					
-					if(VPlayer.isValid(vplayer)){
-						
-						StringBuilder sb = new StringBuilder();
-						pair = new VideologPair(items[15]);		//err
-						
-						sb.append(items[2]);	//ip
-						sb.append(separator);
-						
-						sb.append(items[3]);	//ref
-						sb.append(separator);
-						
-						sb.append(items[4]);	//sid
-						sb.append(separator);
-						
-						sb.append(items[5]);	//uid
-						sb.append(separator);
-						
-						sb.append(items[8]);	//loc
-						sb.append(separator);
-						
-						sb.append(getVType(items[9]));	//cat
-						sb.append(separator);
-						
-						sb.append(timestamp);	//tm
-						sb.append(separator);
-						
-						sb.append(items[12]);	//url
-						sb.append(separator);
-						
-						sb.append(items[14]);	//dur
-						sb.append(separator);
-						
-						sb.append(items[16]);	//bt
-						sb.append(separator);
-						
-						sb.append(items[17]);	//bl
-						sb.append(separator);
-						
-						sb.append(items[18]);	//lt
-						sb.append(separator);
-						
-						sb.append(items[20]);	// vid
-						sb.append(separator);
-						
-						sb.append(items[22]);	//cdnId
-						sb.append(separator);
-						
-						sb.append(items[23]);	//netname
-						sb.append(separator);
-						
-						sb.append(ds);			//ct
-						sb.append(separator);
-						
-						sb.append(hour + ":" +tr);	//tr
-						
-						pair.setValue(sb.toString());
+				if(tr == 60) {
+					int hourInt = Integer.parseInt(hour) + 1;
+					if(hourInt < 10){
+						hour = "0" +hourInt;
 					}
+					trString = hourInt + ":" +"00";
+ 				}else {
+ 					trString = hour + ":" +tr;
+ 				}
+				
+				
+				String timestamp = ds +" "+ hour + ':' +minutes; 
+				
+				if(items.length == 24){
+					StringBuilder sb = new StringBuilder();
+					pair = new VideologPair(items[15]);		//err
+					
+					sb.append(items[2]);	//ip
+					sb.append(separator);
+					
+					sb.append(items[3]);	//ref
+					sb.append(separator);
+					
+					sb.append(items[4]);	//sid
+					sb.append(separator);
+					
+					sb.append(items[5]);	//uid
+					sb.append(separator);
+					
+					sb.append(items[7]);	//from
+					sb.append(separator);
+					
+					sb.append(items[8]);	//loc
+					sb.append(separator);
+					
+					sb.append(VType.getVType(items[9], items[7], items[20]));	//cat
+					sb.append(separator);
+					
+					sb.append(timestamp);	//tm
+					sb.append(separator);
+					
+					sb.append(items[12]);	//url
+					sb.append(separator);
+					
+					sb.append(items[14]);	//dur
+					sb.append(separator);
+					
+					sb.append(items[16]);	//bt
+					sb.append(separator);
+					
+					sb.append(items[17]);	//bl
+					sb.append(separator);
+					
+					sb.append(items[18]);	//lt
+					sb.append(separator);
+					
+					sb.append(items[20]);	// vid
+					sb.append(separator);
+					
+					sb.append(items[21]);	// ptype
+					sb.append(separator);
+					
+					sb.append(items[22]);	//cdnId
+					sb.append(separator);
+					
+					sb.append(items[23]);	//netname
+					sb.append(separator);
+					
+					sb.append(trString);	//tr
+					
+					pair.setValue(sb.toString());
+					
 				}
 			}
 		} catch (Exception e) {
@@ -183,11 +181,11 @@ class VPlayer  {
 	/**
 	 *  站外播放器
 	 */
-	public static final String ZW_Major = "ExtPlayer_V5.3.3";
+	public static final String External_Major = "ExtPlayer_V5.3.3";
 	
 	public static boolean isValid(String player) {
 		if(player != null){
-			if(player.equals(NS_Major) || player.equals(ZW_Major)){
+			if(player.equals(NS_Major) || player.equals(External_Major)){
 				return true;
 			}else{
 				return false;
@@ -196,34 +194,4 @@ class VPlayer  {
 			return false;
 		}
 	}
-}
-
-/**
- * \u89c6\u9891\u7c7b\u578b </p>
- * 
- * <ul>
- * 	<li>\u65b0\u95fb\u77ed\u7247 <tt>[0]</tt></li>
- * 	<li>\u7eaa\u5f55\u7247 <tt>[0]</tt></li>
- * 	<li>\u4e0d\u89c4\u5219\u6027\u7684\u7c7b\u578b\uff0c\u4ee3\u7801\u4e3a# <tt>[999]</tt></li>
- * </ul>
- * @author Hefei Li
- *
- */
-class VType {
-	
-	/**
-	 * \u65b0\u95fb\u77ed\u7247
-	 */
-	public static final int NEWSREEL = 0;
-	
-	/**
-	 * \u7eaa\u5f55\u7247
-	 */
-	public static final int DOCUMENTARY = 1;
-	
-	/**
-	 * \u4e0d\u89c4\u5219\u6027\u7684\u7c7b\u578b\uff0c\u4ee3\u7801\u4e3a#
-	 */
-	public static final int IRREGULARITY = 999;
-	
 }

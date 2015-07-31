@@ -35,6 +35,7 @@
 4	ref	视频所在页面url	ref=http://v.ifeng.com/v/news/djmdnz/index.shtml#01c92b9c-37c7-4510-ac87-519a1224c263
 5	sid	注册用户的用户名，取cookie[‘sid’]	sid=3232F65C8864C995D82D087D8A15FF05kzzxc1
 6	uid	访问用户的ID，用户的唯一标识	uid=1395896719356_cqf3nr8244
+8	from	引用来源，取自XML	from=niushi
 9	loc	空字段	
 10  cat	节目分类，取自XML, 纪录片以'0029-'开头; 默认只分为纪录片和其他视频两类,即不以'0029-'开头的视频都归纳到'其他视频'分类中;
 12	tm	当前系统时间戳，毫秒级	tm=1424048309234
@@ -44,8 +45,8 @@
 18	bl	已加载文件大小（B）	bl=12451187
 19	lt	加载文件耗时（毫秒）	lt=139059
 21	vid	播放器版本	vid=vNsPlayer_nsvp1.0.18
+22	ptype	视频所属类型，取自xml	ptype=0019
 23	cdnId	标记CDN（Sooner-赛维，Chinanet-网宿，Chinacache-蓝讯） （直播需要，非直播留空）	cdnId=ifengP2P
 24	netname	运营商 （直播需要，非直播留空）	netname=移动
-00  ct: 日志生成时间
 00  tr: time range，表示数据生成时间范围，间隔为10分钟。如10：13分生成的数据，则对应的 tr 表示为 10：20。
 -----------------------------------------------------------------------------------------------------

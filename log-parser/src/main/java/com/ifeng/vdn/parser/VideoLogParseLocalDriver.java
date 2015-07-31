@@ -26,8 +26,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @version 0.1
@@ -37,10 +35,6 @@ import org.slf4j.LoggerFactory;
  * @since  May 25, 2015
  */
 public class VideoLogParseLocalDriver extends Configured implements Tool {
-	
-	private static final Logger log = LoggerFactory.getLogger(VideoLogParseLocalDriver.class);
-	
-
 	@Override
 	public int run(String[] args) throws Exception {
 		Job job = Job.getInstance(getConf());
