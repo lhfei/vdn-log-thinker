@@ -110,13 +110,13 @@ public class VideologFilter {
 					sb.append(items[5]);	//uid
 					sb.append(separator);
 					
-					sb.append(items[7]);	//from
-					sb.append(separator);
+					/*sb.append(items[7]);	//from
+					sb.append(separator);*/
 					
 					sb.append(items[8]);	//loc
 					sb.append(separator);
 					
-					sb.append(VType.getVType(items[9], items[7], items[20]));	//cat
+					sb.append(VType.getVType(items[22], items[7], items[20]));	//cat
 					sb.append(separator);
 					
 					sb.append(timestamp);	//tm

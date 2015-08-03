@@ -31,6 +31,8 @@ public class VideologFilterTest {
 	
 		VideologPair pair = VideologFilter.filte(origin, "2015-07-30", "0959");
 		
+		
+		System.out.println(pair.getKey());
 		System.out.println(pair.getValue());
 	}
 
