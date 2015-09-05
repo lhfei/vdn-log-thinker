@@ -8,7 +8,6 @@
 5	sid	注册用户的用户名，取cookie[‘sid’]	sid=3232F65C8864C995D82D087D8A15FF05kzzxc1
 6	uid	访问用户的ID，用户的唯一标识	uid=1395896719356_cqf3nr8244
 7	provider	视频提供商，取自XML	provider=d5f1032b-fe8b-4fbf-ab6b-601caa9480eb
-8	from	引用来源，取自XML	from=niushi
 9	loc	空字段	
 10	cat	节目分类，取自XML	cat=0019-0052-0002
 11	snapid	空字段	snapid=

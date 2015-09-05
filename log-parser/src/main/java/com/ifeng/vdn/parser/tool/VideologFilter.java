@@ -85,8 +85,10 @@ public class VideologFilter {
 					int hourInt = Integer.parseInt(hour) + 1;
 					if(hourInt < 10){
 						hour = "0" +hourInt;
+					}else{
+						hour = ""+hourInt;
 					}
-					trString = hourInt + ":" +"00";
+					trString = hour + ":" +"00";
  				}else {
  					trString = hour + ":" +tr;
  				}
@@ -94,9 +96,15 @@ public class VideologFilter {
 				
 				String timestamp = ds +" "+ hour + ':' +minutes; 
 				
+				String err = "";
 				if(items.length == 24){
+					err = items[15];
+					if(err != null && err.startsWith("301030_")){
+						err = "301030_X";
+					};
+					
 					StringBuilder sb = new StringBuilder();
-					pair = new VideologPair(items[15]);		//err
+					pair = new VideologPair(err);		//err
 					
 					sb.append(items[2]);	//ip
 					sb.append(separator);
